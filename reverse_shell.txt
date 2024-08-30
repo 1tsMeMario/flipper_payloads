@@ -4,9 +4,6 @@ DELAY 500
 REM Open PowerShell as administrator
 STRING powershell Start-Process powershell -Verb runAs
 ENTER
-DELAY 1000
-REM Press Alt+Y to confirm UAC prompt
-ALT Y
 DELAY 500
 
 REM Download the PowerShell script
